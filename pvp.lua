@@ -3,14 +3,12 @@ local UserInputService = game:GetService(“UserInputService”)
 local TweenService = game:GetService(“TweenService”)
 
 local player = Players.LocalPlayer
-if not player then
-return
+while not player do
+wait()
+player = Players.LocalPlayer
 end
 
-local playerGui = player:FindFirstChildOfClass(“PlayerGui”)
-if not playerGui then
-return
-end
+local playerGui = player:WaitForChild(“PlayerGui”)
 
 if playerGui:FindFirstChild(“AppleHubPvP”) then
 playerGui:FindFirstChild(“AppleHubPvP”):Destroy()
@@ -267,8 +265,10 @@ end
 end)
 
 wait(0.5)
+pcall(function()
 game:GetService(“StarterGui”):SetCore(“SendNotification”, {
 Title = “Apple Hub PvP”;
 Text = “Loaded successfully!”;
 Duration = 3;
 })
+end)
